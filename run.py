@@ -20,11 +20,8 @@ def cozmo_program(robot: cozmo.robot.Robot):
         duration_s = 0.1  # time to display each camera frame on Cozmo's face
 
         latest_image = robot.world.latest_image
-        output_img = None
 
         if latest_image is not None:
-
-            # robot.say_text("Tappo").wait_for_completed()
             if latest_image.image_number % 10 == 0:
                 print(latest_image.image_number)
                 img = latest_image.raw_image
@@ -33,9 +30,7 @@ def cozmo_program(robot: cozmo.robot.Robot):
                 if dog_index in det_labels[0].tolist():
                     print("Found Tappo")
                     img.show()
-                    robot.say_text("Tappo I see you").wait_for_completed()
-        if output_img is not None:
-            break
+                    robot.say_text("Tappo I see you")
 
         if latest_image.image_number > 1000:
             break
