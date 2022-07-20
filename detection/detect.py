@@ -20,6 +20,21 @@ normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                  std=[0.229, 0.224, 0.225])
 
 
+def detect_from_raw_pil(img, min_score=0.1, max_overlap=0.01, top_k=1000):
+    img = img.convert('RGB')
+    suppress_labels = [label for label in voc_labels if label not in ["dog"]]
+    image = normalize(to_tensor(resize(img)))
+
+    # Move to default device
+    image = image.to(device)
+
+    # Forward prop.
+    predicted_locs, predicted_scores = model(image.unsqueeze(0))
+
+    # Detect objects in SSD output
+    return model.detect_objects(predicted_locs, predicted_scores, min_score=min_score,
+                                                             max_overlap=max_overlap, top_k=top_k)
+
 def detect(original_image, min_score, max_overlap, top_k, suppress=None):
     """
     Detect objects in an image with a trained SSD300, and visualize the results.
