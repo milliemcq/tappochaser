@@ -2,7 +2,7 @@ from PIL import Image
 from PIL import ImageOps
 from detect import detect
 from utils import voc_labels
-img_path = 'dog.jpg'
+img_path = 'tappo.jpg'
 original_image = Image.open(img_path, mode='r')
 original_image = original_image.convert('RGB')
 suppress_labels = [label for label in voc_labels if label not in ["dog"]]
