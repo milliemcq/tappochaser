@@ -26,6 +26,10 @@ import time
 import cozmo
 
 
+
+
+
+
 def light_when_face(robot: cozmo.robot.Robot):
     '''The core of the light_when_face program'''
 
