@@ -1,11 +1,12 @@
 from torchvision import transforms
-from utils import *
+from .utils import *
 from PIL import Image, ImageDraw, ImageFont
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+import sys
+sys.path.insert(0, './detection')
 # Load model checkpoint
-checkpoint = 'checkpoint_ssd300.pth.tar'
+checkpoint = 'detection/checkpoint_ssd300.pth.tar'
 checkpoint = torch.load(checkpoint, map_location=torch.device("cpu"))
 start_epoch = checkpoint['epoch'] + 1
 print('\nLoaded checkpoint from epoch %d.\n' % start_epoch)

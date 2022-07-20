@@ -17,23 +17,24 @@ def cozmo_program(robot: cozmo.robot.Robot):
         duration_s = 0.1  # time to display each camera frame on Cozmo's face
 
         latest_image = robot.world.latest_image
-
+        output_img = None
         if latest_image is not None:
             # robot.say_text("Tappo").wait_for_completed()
 
             print(latest_image.image_number)
             # print latest_image
             img = latest_image.raw_image
-            img = detect(img, 0.2, 0.1, 100)
-            img.show()
-        break
-
+            output_img = detect(img, 0.2, 0.1, 100)
+        
+        if output_img is not None:
+            break
 
         time.sleep(duration_s)
         # break
 
 
-
+    
+    output_img.show()
 
 
 
